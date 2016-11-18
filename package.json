@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "main": "app.js",
     "scripts": {
-        "start": "PORT=8080 node app.js"
+        "start": "node app.js"
     },
     "dependencies": {
         "node-static": "0.7.6"

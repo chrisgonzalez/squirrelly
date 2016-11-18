@@ -1,6 +1,21 @@
+/* global firebase*/
 /* jshint browser: true, node: false */
 
 window.NTAPI = window.NTAPI || {};
+
+// Initialize Firebase
+var config = {
+        apiKey: 'AIzaSyB6T04_O2og_v5UUWAizCyhVs-TyDmHOUs',
+        authDomain: 'squirrelly-319c4.firebaseapp.com',
+        databaseURL: 'https://squirrelly-319c4.firebaseio.com',
+        storageBucket: 'squirrelly-319c4.appspot.com',
+        messagingSenderId: '741208836197'
+    },
+    database;
+
+firebase.initializeApp(config);
+
+database = firebase.database();
 
 (function () {
     'use strict';
@@ -97,14 +112,25 @@ window.NTAPI = window.NTAPI || {};
             console.log(metrics);
         }
 
-        if (metrics.type && window.NTAPI.PostUrl) {
-            var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
-            xmlhttp.open('POST', window.NTAPI.PostUrl);
-            xmlhttp.setRequestHeader('Content-Type', 'application/json');
-            xmlhttp.send(JSON.stringify(metrics));
+        if (metrics.type) {
+            var now = new Date(),
+                ts = now.getTime(metrics);
+            
+            database.ref('users/' + ts).set(metrics);
         } else if (window.debug) {
             console.log('Navigation Timing Settings Definition Error. Metrics Type:', metrics.type, 'PostUrl:', window.NTAPI.PostUrl);
         }
+    }
+    
+    /* gets a random gender */
+    function getGender() {
+        var textArray = [
+                'male',
+                'female'
+            ],
+            randomNumber = Math.floor(Math.random() * textArray.length);
+        
+        return textArray[randomNumber];
     }
 
     /* get the metrics we have after page load */
@@ -114,7 +140,10 @@ window.NTAPI = window.NTAPI || {};
                 complete: '',
                 timing: {
                     performance: ((window.performance && window.performance.timing) ? window.performance.timing : {})
-                }
+                },
+                brand: 'CNN',
+                title: document.title,
+                gender: getGender()
             },
             debug = (window.location.search.indexOf('debug=true') > -1) || false;
 
