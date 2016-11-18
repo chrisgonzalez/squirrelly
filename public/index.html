@@ -2,7 +2,7 @@
     <head>
         <title>CNN</title>
         <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
-        <script src="js/navigation-timing.js"></script>
+        <script src="js/cooper.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     </head>
     <body>
@@ -14,7 +14,32 @@
             .article {
                 width: 100%;
             }
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #000;
+                filter:alpha(opacity=50);
+                -moz-opacity:0.5;
+                -khtml-opacity: 0.5;
+                opacity: 0.5;
+                z-index: 1000;
+            }
+            .box {
+                position: fixed;
+                top: 20%;
+                left: 10%;
+                background: white;
+                z-index: 2000;
+            }
         </style>
-        <img class="article" src="img/cooper.png"/>
+        <div class="overlay"></div>
+        <div><img class="article" src="img/cooper.png"/></div>
+        <div class="box">
+            <div id="yes">YES</div>
+            <div id="no">NO</div>
+        </div>
     </body>
 </html>
