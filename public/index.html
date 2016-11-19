@@ -7,6 +7,7 @@
     </head>
     <body>
         <style>
+            html,
             body {
                 padding: 0;
                 margin: 0;
@@ -30,16 +31,30 @@
             .box {
                 position: fixed;
                 top: 20%;
-                left: 10%;
-                background: white;
+                left: 0;
+                right: 0;
                 z-index: 2000;
+                background: url('/img/Cooper-card-320w.png') no-repeat;
+                width: 320px;
+                height: 100%;
+                margin: 0 auto;
+            }
+            .choice {
+                display: inline-block;
+                height: 25%;
+                width: 155px;
+                margin-top: 140px;
+            }
+            .nochoice {
+                height: 30px;
             }
         </style>
         <div class="overlay"></div>
         <div><img class="article" src="img/cooper.png"/></div>
         <div class="box">
-            <div id="yes">YES</div>
-            <div id="no">NO</div>
+            <div id="1" class="choice"><a href="#"></a></div>
+            <div id="2" class="choice"><a href="#"></a></div>
+            <div id="3" class="nochoice"><a href="#"></a></div>
         </div>
     </body>
 </html>
