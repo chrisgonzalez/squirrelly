@@ -1,11 +1,221 @@
 <html>
     <head>
         <title>Cooper</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script type='text/javascript' src='https://d3js.org/d3.v4.min.js'></script>
         <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     </head>
     <body>
-        <div id="chart"></div>
+        <style type="text/css">
+            @-webkit-keyframes animate-width {
+              0% {
+                width: 0;
+              }
+              100% {
+                visibility: visible;
+              }
+            }
+            @-moz-keyframes animate-width {
+              0% {
+                width: 0;
+              }
+              100% {
+                visibility: visible;
+              }
+            }
+            @keyframes animate-width {
+              0% {
+                width: 0;
+              }
+              100% {
+                visibility: visible;
+              }
+            }
+            @-webkit-keyframes animate-height {
+              0% {
+                height: 0;
+              }
+              100% {
+                visibility: visible;
+              }
+            }
+            @-moz-keyframes animate-height {
+              0% {
+                height: 0;
+              }
+              100% {
+                visibility: visible;
+              }
+            }
+            @keyframes animate-height {
+              0% {
+                height: 0;
+              }
+              100% {
+                visibility: visible;
+              }
+            }
+            body {
+              background-color: #3b4150;
+              font-family: arial, sans-serif;
+              color: #cdcdcd;
+            }
+            
+            #bar-chart {
+              height: 380px;
+              width: 70%;
+              position: relative;
+              margin: 50px auto 0;
+            }
+            #bar-chart * {
+              box-sizing: border-box;
+            }
+            #bar-chart .graph {
+              height: 283px;
+              position: relative;
+            }
+            #bar-chart .bars {
+              height: 253px;
+              padding: 0 2%;
+              position: absolute;
+              width: 100%;
+              z-index: 10;
+            }
+            #bar-chart .bar-group {
+              display: block;
+              float: left;
+              height: 100%;
+              position: relative;
+              width: 26%;
+              margin-right: 10%;
+            }
+            #bar-chart .bar-group:last-child {
+              margin-right: 0;
+            }
+            #bar-chart .bar-group .bar {
+              visibility: hidden;
+              height: 0;
+              -webkit-animation: animate-height;
+              -moz-animation: animate-height;
+              animation: animate-height;
+              animation-timing-function: cubic-bezier(0.35, 0.95, 0.67, 0.99);
+              -webkit-animation-timing-function: cubic-bezier(0.35, 0.95, 0.67, 0.99);
+              -moz-animation-timing-function: cubic-bezier(0.35, 0.95, 0.67, 0.99);
+              animation-duration: 0.4s;
+              -webkit-animation-duration: 0.4s;
+              -moz-animation-duration: 0.4s;
+              animation-fill-mode: forwards;
+              -webkit-animation-fill-mode: forwards;
+              box-shadow: 1px 0 2px rgba(0, 0, 0, 0.15);
+              border: 1px solid #2d2d2d;
+              border-radius: 3px 3px 0 0;
+              bottom: 0;
+              cursor: pointer;
+              height: 0;
+              position: absolute;
+              text-align: center;
+              width: 100%;
+            }
+            #bar-chart .bar-group .bar:nth-child(2) {
+              left: 35%;
+            }
+            #bar-chart .bar-group .bar:nth-child(3) {
+              left: 70%;
+            }
+            #bar-chart .bar-group .bar span {
+              display: none;
+            }
+            #bar-chart .bar-group .bar-1 {
+              animation-delay: 0.3s;
+              -webkit-animation-delay: 0.3s;
+            }
+            #bar-chart .bar-group .bar-5 {
+              animation-delay: 0.7s;
+              -webkit-animation-delay: 0.7s;
+            }
+            #bar-chart .bar-group .bar-9 {
+              animation-delay: 1.1s;
+              -webkit-animation-delay: 1.1s;
+            }
+            #bar-chart ul {
+              list-style: none;
+              margin: 0;
+              padding: 0;
+            }
+            #bar-chart .x-axis {
+              bottom: 0;
+              position: absolute;
+              text-align: center;
+              width: 100%;
+            }
+            #bar-chart .x-axis li {
+              float: left;
+              margin-right: 6%;
+              font-size: 11px;
+              width: 28%;
+            }
+            #bar-chart .x-axis li:last-child {
+              margin-right: 0;
+            }
+            #bar-chart .y-axis {
+              position: absolute;
+              text-align: right;
+              width: 100%;
+            }
+            #bar-chart .y-axis li {
+              border-top: 1px solid #4e5464;
+              display: block;
+              height: 63.25px;
+              width: 100%;
+            }
+            #bar-chart .y-axis li span {
+              display: block;
+              font-size: 11px;
+              margin: -10px 0 0 -60px;
+              padding: 0 10px;
+              width: 40px;
+            }
+            #bar-chart .stat-1 {
+              background-image: -webkit-linear-gradient(left, #9C27B0 0%, #9C27B0 47%, #673AB7 50%, #673AB7 100%);
+              background-image: linear-gradient(to right, #9C27B0 0%, #9C27B0 47%, #673AB7 50%, #673AB7 100%);
+            }
+            #bar-chart .stat-2 {
+              background-image: -webkit-linear-gradient(left, #b8f123 0%, #b8f123 47%, #79a602 50%, #79a602 100%);
+              background-image: linear-gradient(to right, #b8f123 0%, #b8f123 47%, #79a602 50%, #79a602 100%);
+            }
+            #bar-chart .stat-3 {
+              background-image: -webkit-linear-gradient(left, #00c5ff 0%, #00c5ff 47%, #0383a9 50%, #0383a9 100%);
+              background-image: linear-gradient(to right, #00c5ff 0%, #00c5ff 47%, #0383a9 50%, #0383a9 100%);
+            }
+        </style>
+        <div id="bar-chart">
+          <div class="graph">
+            <ul class="x-axis">
+              <li><span>Papa Johns</span></li>
+              <li><span>Pizz Hut</span></li>
+              <li><span>Undecided</span></li>
+            </ul>
+            <ul class="y-axis">
+              <li><span>20</span></li>
+              <li><span>15</span></li>
+              <li><span>10</span></li>
+              <li><span>5</span></li>
+              <li><span>0</span></li>
+            </ul>
+            <div class="bars">
+              <div class="bar-group">
+                <div class="bar bar-1 stat-1"></div>
+              </div>
+              <div class="bar-group">
+                <div class="bar bar-5 stat-2"></div>
+              </div>
+              <div class="bar-group">
+                <div class="bar bar-9 stat-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <script>
         /*global firebase*/
         var config = {
@@ -21,13 +231,34 @@
         firebase.initializeApp(config);
         preferences = firebase.database().ref('preference-test/');
         preferences.on('value', function(snapshot) {
-          for (preference in snapshot.val()) {
-              if (snapshot.val().hasOwnProperty(preference)) {
-                  var item = document.createElement('div');
-                  item.innerHTML = snapshot.val()[preference].answer;
-                  document.getElementById('chart').appendChild(item);
-              }
-          }
+            var pj = 0,
+                ph = 0,
+                un = 0,
+                answer;
+            for (preference in snapshot.val()) {
+                if (snapshot.val().hasOwnProperty(preference)) {
+                    console.log(snapshot.val()[preference]);
+                        answer = snapshot.val()[preference].answer;
+                    
+                    switch (answer) {
+                        case 'papa-johns':
+                            pj++;
+                            break;
+                        case 'pizza-hut':
+                            ph++;
+                            break;
+                        default:
+                            un++;
+                            break;
+                    }
+                }
+            }
+            console.log(pj);
+            console.log(ph);
+            console.log(un);
+            jQuery('.stat-1').height(pj + '%');
+            jQuery('.stat-2').height(ph + '%');
+            jQuery('.stat-3').height(un + '%');
         });
         </script>
     </body>

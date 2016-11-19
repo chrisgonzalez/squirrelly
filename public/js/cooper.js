@@ -27,15 +27,10 @@ window.Cooper = {};
             console.log('Cooper posting metrics:');
             console.log(metrics);
         }
-
-        if (metrics.type) {
-            var now = new Date(),
-                ts = now.getTime(metrics);
+        var now = new Date(),
+            ts = now.getTime(metrics);
             
-            database.ref('preference-test/' + ts).set(metrics);
-        } else if (window.debug) {
-            console.log('Cooper Definition Error. Metrics Type:', metrics.type);
-        }
+        database.ref('preference-test/' + ts).set(metrics);
     }
 
     window.Cooper.postMetrics = postMetrics;
