@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>CNN</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
         <script src="js/cooper.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -47,14 +48,25 @@
             }
             .nochoice {
                 height: 30px;
+                display: block;
+                margin-top: 0;
+                width: 100%;
             }
         </style>
         <div class="overlay"></div>
-        <div><img class="article" src="img/cooper.png"/></div>
+        <div><img class="article" src="img/cooper_300w.png"/></div>
         <div class="box">
-            <div id="1" class="choice"><a href="#"></a></div>
-            <div id="2" class="choice"><a href="#"></a></div>
-            <div id="3" class="nochoice"><a href="#"></a></div>
+            <div id="papa-johns" class="choice"></div>
+            <div id="pizza-hut" class="choice"></div>
+            <div id="nochoice" class="choice nochoice"></div>
         </div>
+        <script>
+            /*global Cooper, jQuery*/
+            jQuery('.choice').click(function(e) {
+                Cooper.postMetrics({answer: this.id});
+                jQuery('.overlay').hide();
+                jQuery('.box').hide();
+            });
+        </script>
     </body>
 </html>
