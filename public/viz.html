@@ -194,11 +194,50 @@
                 width: 80%;
             }
             .date-img {
-                height: 90px;
+                height: 80px;
+                max-width: 300px;
+            }
+            #clock {
+                float: right;
+                background-color: white;
+                padding: 20px;
+                color: #c00;
+                margin: 5px 45px;
+                width: 205px;
+                font-weight: bold;
+                font-size: 25px;
+            }
+            @media (max-width: 810px) {
+                #clock {
+                    margin: 5px 45px 5px 10px;
+                }
+            }
+            @media (max-width: 770px) {
+                .date-img {
+                  height: 60px;
+                }
+                #clock {
+                    margin: 5px 45px 5px 10px;
+                    font-size: 20px;
+                    width: 165px;
+                }
+            }
+            @media (max-width: 640px) {
+                .date {
+                  height: 125px;
+                }
+                .date-img {
+                  height: 70px;
+                }
+                #clock {
+                    float: none;
+                    margin: 10px auto;
+                }
             }
         </style>
         <div class="date">
             <img class="date-img" src="img/cooper-date.png"/>
+            <div id="clock"></div>
         </div>
         <div id="bar-chart">
           <div class="graph">
@@ -271,6 +310,31 @@
             jQuery('.stat-2').height(ph + '%');
             jQuery('.stat-3').height(un + '%');
         });
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }  // add zero in front of numbers < 10
+            return i;
+        }
+        (function startTime() {
+            var today = new Date(),
+                h = today.getHours(),
+                m = today.getMinutes(),
+                s = today.getSeconds(),
+                t,
+                part = 'AM';
+                
+            if (h >= 12) {
+                part = 'PM';
+            }
+            
+            m = checkTime(m);
+            s = checkTime(s);
+            
+            document.getElementById('clock').innerHTML = h + ':' + m + ':' + s + ' ' + part + ' EST';
+            
+            t = setTimeout(startTime, 500);
+        })();
         </script>
     </body>
 </html>
