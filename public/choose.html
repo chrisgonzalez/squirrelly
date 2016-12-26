@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>COOPER - Choose</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+        <script src="js/cooper.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    </head>
+    <body>
+        <style>
+            html,
+            body {
+                padding: 0;
+                margin: 0;
+                font-family: Maverick;
+            }
+            @font-face{
+                font-family: "Maverick";
+                src: url("fonts/maverick.otf");
+            }
+            .article {
+                width: 100%;
+            }
+            .content {
+                max-width: 420px;
+                height: 100%;
+                margin: 0 auto;
+                background: url("img/choose.png") no-repeat;
+                background-size: contain;
+            }
+            .box {
+                display: none;
+            }
+            .choice {
+                display: inline-block;
+                height: 120px;
+                width: 155px;
+                margin-top: 180px;
+            }
+            .nochoice {
+                height: 60px;
+                display: block;
+                margin-top: 20px;
+                width: 100%;
+            }
+            .question {
+                text-transform: uppercase;
+                position: fixed;
+                color: white;
+                top: 44%;
+                margin-left: 60px;
+                font-size: 22px;
+                width: 140px;
+                text-align: center;
+            }
+            @media (max-width: 420px) {
+                .question {
+                    margin-left: 115px;
+                    font-size: 26px;
+                }
+            }
+        </style>
+        <div class="overlay"></div>
+        <div class="content">
+            <div class="question">choose the next presenter</div>
+        </div>
+        <div class="box">
+            <div id="papa-johns" class="choice"></div>
+            <div id="pizza-hut" class="choice"></div>
+            <div id="nochoice" class="choice nochoice"></div>
+        </div>
+        <script>
+            /*global Cooper, jQuery*/
+            jQuery('.choice').click(function(e) {
+                Cooper.postMetrics({answer: this.id});
+                jQuery('.overlay').hide();
+                jQuery('.box').hide();
+            });
+        </script>
+    </body>
+</html>
