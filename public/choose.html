@@ -46,13 +46,17 @@
                 position: fixed;
                 color: white;
                 top: 35%;
-                margin-left: 6.5%;
+                margin: auto;
                 font-size: 22px;
                 width: 300px;
                 height: 300px;
                 text-align: center;
                 background: url("img/choose-q.png");
                 background-size: cover;
+            }
+            .q-wrap {
+                width: 300px;
+                margin: 0 auto;
             }
             .q-text {
                 width: 300px;
@@ -62,46 +66,27 @@
             @media (max-width: 1024px) {
                 .question {
                     top: 18%;
-                    margin-left: 9%;
-                }
-            }
-            @media (max-width: 768px) {
-                .question {
-                    margin-left: 11.5%;
                 }
             }
             @media (max-width: 670px) {
                 .question {
                     top: 10%;
-                    margin-left: 13.5%;
                 }
             }
             @media (max-width: 480px) {
-                .content {
-                    margin: 0;
-                }
                 .question {
-                    margin-left: 15%;
                     font-size: 26px;
                     top: 27%;
-                }
-            }
-            @media (max-width: 380px) {
-                .question {
-                    margin-left: 11%;
-                }
-            }
-            @media (max-width: 320px) {
-                .question {
-                    margin-left: 3%;
                 }
             }
         </style>
         <div class="overlay"></div>
         <div class="content">
             <img src="img/choose-bg.png"/>
-            <div class="question">
-                <div class="q-text">choose the next presenter</div>
+            <div class="q-wrap">
+                <div class="question">
+                    <div class="q-text">choose the next presenter</div>
+                </div>
             </div>
         </div>
         <div class="box">
