@@ -22,9 +22,9 @@
                 width: 100%;
             }
             .content {
-                max-width: 480px;
                 height: 100%;
                 margin: 0 auto;
+                background: url("img/choose-bg.png");
             }
             .box {
                 display: none;
@@ -41,52 +41,52 @@
                 margin-top: 20px;
                 width: 100%;
             }
-            .question {
-                text-transform: uppercase;
+            .answer {
                 position: fixed;
-                color: white;
                 top: 35%;
                 margin: auto;
-                font-size: 22px;
                 width: 300px;
                 height: 300px;
-                text-align: center;
                 background: url("img/choose-q.png");
                 background-size: cover;
             }
-            .q-wrap {
+            .answer-wrap {
                 width: 300px;
                 margin: 0 auto;
             }
             .q-text {
-                width: 300px;
-                margin-top: 120px;
+                max-width: 480px;
                 font-size: 35px;
+                color: white;
+                margin: 0 auto;
+                text-align: center;
+                text-transform: uppercase;
+                background-color: black;
             }
             @media (max-width: 1024px) {
-                .question {
+                .answer {
                     top: 18%;
                 }
             }
             @media (max-width: 670px) {
-                .question {
-                    top: 10%;
+                .answer {
+                    top: 15%;
                 }
             }
             @media (max-width: 480px) {
-                .question {
-                    font-size: 26px;
+                .answer {
                     top: 27%;
+                }
+                .q-text {
+                    font-size: 26px;
                 }
             }
         </style>
         <div class="overlay"></div>
         <div class="content">
-            <img src="img/choose-bg.png"/>
-            <div class="q-wrap">
-                <div class="question">
-                    <div class="q-text">choose the next presenter</div>
-                </div>
+            <div class="q-text">choose the next presenter</div>
+            <div class="answer-wrap">
+                <div class="answer"></div>
             </div>
         </div>
         <div class="box">
