@@ -22,11 +22,9 @@
                 width: 100%;
             }
             .content {
-                max-width: 420px;
+                max-width: 480px;
                 height: 100%;
                 margin: 0 auto;
-                background: url("img/choose.png") no-repeat;
-                background-size: contain;
             }
             .box {
                 display: none;
@@ -47,22 +45,64 @@
                 text-transform: uppercase;
                 position: fixed;
                 color: white;
-                top: 44%;
-                margin-left: 60px;
+                top: 35%;
+                margin-left: 6.5%;
                 font-size: 22px;
-                width: 140px;
+                width: 300px;
+                height: 300px;
                 text-align: center;
+                background: url("img/choose-q.png");
+                background-size: cover;
             }
-            @media (max-width: 420px) {
+            .q-text {
+                width: 300px;
+                margin-top: 120px;
+                font-size: 35px;
+            }
+            @media (max-width: 1024px) {
                 .question {
-                    margin-left: 115px;
+                    top: 18%;
+                    margin-left: 9%;
+                }
+            }
+            @media (max-width: 768px) {
+                .question {
+                    margin-left: 11.5%;
+                }
+            }
+            @media (max-width: 670px) {
+                .question {
+                    top: 10%;
+                    margin-left: 13.5%;
+                }
+            }
+            @media (max-width: 480px) {
+                .content {
+                    margin: 0;
+                }
+                .question {
+                    margin-left: 15%;
                     font-size: 26px;
+                    top: 27%;
+                }
+            }
+            @media (max-width: 380px) {
+                .question {
+                    margin-left: 11%;
+                }
+            }
+            @media (max-width: 320px) {
+                .question {
+                    margin-left: 3%;
                 }
             }
         </style>
         <div class="overlay"></div>
         <div class="content">
-            <div class="question">choose the next presenter</div>
+            <img src="img/choose-bg.png"/>
+            <div class="question">
+                <div class="q-text">choose the next presenter</div>
+            </div>
         </div>
         <div class="box">
             <div id="papa-johns" class="choice"></div>
