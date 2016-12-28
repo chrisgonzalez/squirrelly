@@ -131,11 +131,13 @@
                 accept: '.choice',
                 activeClass: 'ui-state-highlight',
                 drop: function(event, ui) {
-                    console.log(ui.draggable.context.id);
+                    var id = ui.draggable.context.id;
                     Cooper.postMetrics(
-                        {answer: ui.draggable.context.id},
+                        {answer: id},
                         'presenters/'
                     );
+                    jQuery('.choices').hide();
+                    jQuery('.answer-text').text('you chose ' + id + '!');
                 }
             });
         </script>
