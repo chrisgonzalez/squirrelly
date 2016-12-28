@@ -1,9 +1,9 @@
 <html>
     <head>
         <title>Cooper</title>
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-        <script type='text/javascript' src='https://d3js.org/d3.v4.min.js'></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+        <script src="js/jquery-1.12.4.min.js"></script>
+        <script src="js/d3.v4.min.js"></script>
+        <script src="js/firebase-3.6.1.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     </head>
     <body>
@@ -61,7 +61,7 @@
               font-family: arial, sans-serif;
               color: #cdcdcd;
             }
-            
+
             #bar-chart {
               height: 380px;
               width: 70%;
@@ -267,7 +267,8 @@
           </div>
         </div>
         <script>
-        /*global firebase*/
+        /*global firebase, jQuery, document*/
+        'use strict';
         var config = {
             apiKey: 'AIzaSyB6T04_O2og_v5UUWAizCyhVs-TyDmHOUs',
             authDomain: 'squirrelly-319c4.firebaseapp.com',
@@ -289,7 +290,7 @@
                 if (snapshot.val().hasOwnProperty(preference)) {
                     console.log(snapshot.val()[preference]);
                         answer = snapshot.val()[preference].answer;
-                    
+
                     switch (answer) {
                         case 'papa-johns':
                             pj++;
@@ -312,7 +313,7 @@
         });
         function checkTime(i) {
             if (i < 10) {
-                i = "0" + i;
+                i = '0' + i;
             }  // add zero in front of numbers < 10
             return i;
         }
@@ -323,19 +324,19 @@
                 s = today.getSeconds(),
                 t,
                 part = 'AM';
-                
+
             if (h >= 12) {
                 part = 'PM';
                 if (h > 12) {
                   h = h - 12;
                 }
             }
-            
+
             m = checkTime(m);
             s = checkTime(s);
-            
+
             document.getElementById('clock').innerHTML = h + ':' + m + ':' + s + ' ' + part + ' EST';
-            
+
             t = setTimeout(startTime, 500);
         })();
         </script>

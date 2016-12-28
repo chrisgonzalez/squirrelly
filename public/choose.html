@@ -1,9 +1,6 @@
 <html>
     <head>
         <title>COOPER - Choose</title>
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
-        <script src="js/cooper.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     </head>
     <body>
@@ -30,28 +27,31 @@
             .box {
                 display: none;
             }
+            .choices {
+                position: fixed;
+                top: 65%;
+                max-width: 480px;
+            }
             .choice {
                 display: inline-block;
                 height: 120px;
-                width: 155px;
-                margin-top: 180px;
+                width: 130px;
+                background-color: black;
             }
-            .nochoice {
-                height: 60px;
-                display: block;
-                margin-top: 20px;
-                width: 100%;
+            .choice-left {
+                margin-right: 40px;
+            }
+            .choice-right {
+                float: right;
             }
             .answer {
                 position: fixed;
-                top: 35%;
-                margin: auto;
-                width: 300px;
+                top: 20%;
                 height: 300px;
                 background: url("img/choose-q.png");
                 background-size: cover;
             }
-            .answer-wrap {
+            .wrap {
                 width: 300px;
                 margin: 0 auto;
             }
@@ -70,9 +70,15 @@
                 text-transform: uppercase;
                 background-color: black;
             }
+            [draggable=true] {
+                cursor: move;
+            }
             @media (max-width: 1024px) {
                 .answer {
-                    top: 18%;
+                    top: 20%;
+                }
+                .choices {
+                    top: 71%;
                 }
             }
             @media (max-width: 670px) {
@@ -82,7 +88,7 @@
             }
             @media (max-width: 480px) {
                 .answer {
-                    top: 27%;
+                    top: 13%;
                 }
                 .q-text {
                     font-size: 26px;
@@ -92,9 +98,15 @@
         <div class="overlay"></div>
         <div class="content">
             <div class="q-text">choose the next presenter</div>
-            <div class="answer-wrap">
+            <div class="wrap">
                 <div class="answer">
                     <div class="answer-text">drag your answer here</div>
+                </div>
+            </div>
+            <div class="wrap">
+                <div class="choices">
+                    <div class="choice-left choice" draggable="true">left</div>
+                    <div class="choice-right choice" draggable="true">right</div>
                 </div>
             </div>
         </div>
@@ -103,12 +115,21 @@
             <div id="pizza-hut" class="choice"></div>
             <div id="nochoice" class="choice nochoice"></div>
         </div>
+        <script src="js/jquery-1.12.4.min.js"></script>
+        <script src="js/firebase-3.6.1.js"></script>
+        <script src="js/cooper.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/jquery-ui.touch-punch.min.js"></script>
         <script>
             /*global Cooper, jQuery*/
+            'use strict';
             jQuery('.choice').click(function(e) {
                 Cooper.postMetrics({answer: this.id});
                 jQuery('.overlay').hide();
                 jQuery('.box').hide();
+            });
+            jQuery('.choice').draggable({
+                addClasses: false
             });
         </script>
     </body>
