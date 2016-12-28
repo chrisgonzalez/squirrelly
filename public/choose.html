@@ -2,6 +2,9 @@
     <head>
         <title>COOPER - Choose</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <link rel="stylesheet" href="css/jquery-ui.min.css">
+        <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+        <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
     </head>
     <body>
         <style>
@@ -59,7 +62,7 @@
                 width: 300px;
                 text-align: center;
                 font-size: 24px;
-                padding-top: 130px;
+                margin-top: 130px;
                 color: gray;
             }
             .q-text {
@@ -69,9 +72,6 @@
                 text-align: center;
                 text-transform: uppercase;
                 background-color: black;
-            }
-            [draggable=true] {
-                cursor: move;
             }
             @media (max-width: 1024px) {
                 .answer {
@@ -105,8 +105,8 @@
             </div>
             <div class="wrap">
                 <div class="choices">
-                    <div class="choice-left choice" draggable="true">left</div>
-                    <div class="choice-right choice" draggable="true">right</div>
+                    <div class="choice-left choice">left</div>
+                    <div class="choice-right choice">right</div>
                 </div>
             </div>
         </div>
@@ -130,6 +130,13 @@
             });
             jQuery('.choice').draggable({
                 addClasses: false
+            });
+            jQuery('.answer-text').droppable({
+                accept: '.choice',
+                activeClass: 'ui-state-highlight',
+                drop: function(event, ui) {
+                    console.log('dropped');
+                }
             });
         </script>
     </body>
