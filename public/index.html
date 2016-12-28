@@ -64,7 +64,10 @@
             /*global Cooper, jQuery*/
             'use strict';
             jQuery('.choice').click(function(e) {
-                Cooper.postMetrics({answer: this.id});
+                Cooper.postMetrics(
+                    {answer: this.id},
+                    'preference-test/'
+                );
                 jQuery('.overlay').hide();
                 jQuery('.box').hide();
             });

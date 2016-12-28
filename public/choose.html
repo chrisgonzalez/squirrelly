@@ -107,19 +107,14 @@
             </div>
             <div class="wrap">
                 <div class="choices">
-                    <div class="choice-left choice">
+                    <div class="choice-left choice" id="conan">
                         <img src="img/conan-head-small.png"/>
                     </div>
-                    <div class="choice-right choice">
+                    <div class="choice-right choice" id="samantha">
                         <img src="img/sambee-head-small.png"/>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="box">
-            <div id="papa-johns" class="choice"></div>
-            <div id="pizza-hut" class="choice"></div>
-            <div id="nochoice" class="choice nochoice"></div>
         </div>
         <script src="js/jquery-1.12.4.min.js"></script>
         <script src="js/firebase-3.6.1.js"></script>
@@ -129,11 +124,6 @@
         <script>
             /*global Cooper, jQuery*/
             'use strict';
-            jQuery('.choice').click(function(e) {
-                Cooper.postMetrics({answer: this.id});
-                jQuery('.overlay').hide();
-                jQuery('.box').hide();
-            });
             jQuery('.choice').draggable({
                 addClasses: false
             });
@@ -141,7 +131,11 @@
                 accept: '.choice',
                 activeClass: 'ui-state-highlight',
                 drop: function(event, ui) {
-                    console.log('dropped');
+                    console.log(ui.draggable.context.id);
+                    Cooper.postMetrics(
+                        {answer: ui.draggable.context.id},
+                        'presenters/'
+                    );
                 }
             });
         </script>

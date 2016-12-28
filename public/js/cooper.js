@@ -20,7 +20,7 @@ window.Cooper = {};
 (function () {
     'use strict';
 
-    function postMetrics(metrics) {
+    function postMetrics(metrics, db) {
         metrics = metrics || {};
 
         if (window.debug) {
@@ -29,8 +29,8 @@ window.Cooper = {};
         }
         var now = new Date(),
             ts = now.getTime(metrics);
-            
-        database.ref('preference-test/' + ts).set(metrics);
+
+        database.ref(db + ts).set(metrics);
     }
 
     window.Cooper.postMetrics = postMetrics;
