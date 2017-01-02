@@ -42,12 +42,13 @@
             }
             .choice img {
                 width: 100px;
+                vertical-align: top;
             }
             .choice-left {
                 margin-right: 100px;
             }
             .choice-right {
-                float: right;
+                /*float: right;*/
             }
             .answer {
                 position: fixed;
@@ -136,8 +137,9 @@
                         {answer: id},
                         'presenters/'
                     );
-                    jQuery('.choices').hide();
-                    jQuery('.answer-text').text('you chose ' + id + '!');
+                    jQuery('.choice').not('#' + id).css('visibility', 'hidden');
+                    jQuery('#' + id).fadeTo(1, 0.2);
+                    jQuery('.answer-text').text('you chose ' + id + '!').css('color', 'white');
                 }
             });
         </script>
