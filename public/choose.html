@@ -123,8 +123,11 @@
         <script src="js/jquery-ui.min.js"></script>
         <script src="js/jquery-ui.touch-punch.min.js"></script>
         <script>
-            /*global Cooper, jQuery*/
+            /*global Cooper, jQuery, location*/
             'use strict';
+            var debug = location.search.indexOf('debug=true');
+            console.log('debug set to ' + debug);
+            
             jQuery('.choice').draggable({
                 addClasses: false
             });
@@ -133,13 +136,20 @@
                 activeClass: 'ui-state-highlight',
                 drop: function(event, ui) {
                     var id = ui.draggable.context.id;
-                    Cooper.postMetrics(
-                        {answer: id},
-                        'presenters/'
-                    );
+
+                    if (debug === -1) {
+                        Cooper.postMetrics(
+                            {answer: id},
+                            'presenters/'
+                        );
+                    }
+
                     jQuery('.choice').not('#' + id).css('visibility', 'hidden');
                     jQuery('#' + id).fadeTo(1, 0.2);
                     jQuery('.answer-text').text('you chose ' + id + '!').css('color', 'white');
+                    jQuery('.choice').draggable({
+                        disabled: true
+                    });
                 }
             });
         </script>
