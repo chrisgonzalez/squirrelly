@@ -15,8 +15,8 @@
         <div id="bar-chart">
           <div class="graph">
             <ul class="x-axis">
-              <li><span>Conan</span></li>
-              <li><span>Samantha</span></li>
+              <li><span>Yes</span></li>
+              <li><span>No</span></li>
               <li><span>Undecided</span></li>
             </ul>
             <ul class="y-axis">
@@ -53,7 +53,7 @@
         preference;
 
         firebase.initializeApp(config);
-        preferences = firebase.database().ref('presenters/');
+        preferences = firebase.database().ref('break/');
         preferences.on('value', function(snapshot) {
             var pj = 0,
                 ph = 0,
@@ -65,10 +65,10 @@
                         answer = snapshot.val()[preference].answer;
 
                     switch (answer) {
-                        case 'conan':
+                        case 'yes':
                             pj++;
                             break;
-                        case 'samantha':
+                        case 'no':
                             ph++;
                             break;
                         default:
