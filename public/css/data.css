@@ -183,17 +183,29 @@ body {
     position: relative;
     width: 80%;
 }
+.day,
+.date-img {
+    max-width: 300px;
+    display: inline-block;
+}
 .date-img {
     height: 80px;
-    max-width: 300px;
 }
-#clock {
+.day {
+    height: 50px;
+    margin-top: 30px;
+    color: white;
+}
+.clock {
     float: right;
     background-color: white;
     padding: 20px;
     color: #c00;
     margin: 5px 45px;
     width: 205px;
+}
+.day,
+.clock {
     font-weight: bold;
     font-size: 25px;
 }
