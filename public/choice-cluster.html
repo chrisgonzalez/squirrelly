@@ -14,7 +14,7 @@
             <div class="clock" id="clock"></div>
         </div>
 
-        <div class="viz"></div>
+        <svg class="viz"></svg>
 
         <script>
         /*global firebase, jQuery*/
@@ -32,8 +32,7 @@
         firebase.initializeApp(config);
         preferences = firebase.database().ref('presenters/');
         preferences.on('value', function(snapshot) {
-            drawBarGraph(voteCounts(snapshot.val()));
-            voteCounts(snapshot.val())
+            drawClusters(voteCounts(snapshot.val()));
         });
         </script>
         <script src="js/vendor/time.js"></script>

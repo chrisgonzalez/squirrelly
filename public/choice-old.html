@@ -5,6 +5,7 @@
         <script src="js/vendor/jquery-1.12.4.min.js"></script>
         <script src="js/vendor/d3.v4.min.js"></script>
         <script src="js/vendor/firebase-3.6.1.js"></script>
+        <script src="js/viz.bundle.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     </head>
     <body>
@@ -15,8 +16,8 @@
         <div id="bar-chart">
           <div class="graph">
             <ul class="x-axis">
-              <li><span>Papa Johns</span></li>
-              <li><span>Pizza Hut</span></li>
+              <li><span>Conan</span></li>
+              <li><span>Samantha</span></li>
               <li><span>Undecided</span></li>
             </ul>
             <ul class="y-axis">
@@ -53,22 +54,27 @@
         preference;
 
         firebase.initializeApp(config);
-        preferences = firebase.database().ref('preference-test/');
+        preferences = firebase.database().ref('presenters/');
         preferences.on('value', function(snapshot) {
+            console.log('snap', snapshot.val());
+
+            console.log(voteCounts(snapshot.val()));
+
+            // OLD CODE
             var pj = 0,
                 ph = 0,
                 un = 0,
                 answer;
             for (preference in snapshot.val()) {
                 if (snapshot.val().hasOwnProperty(preference)) {
-                    console.log(snapshot.val()[preference]);
+                    // console.log(snapshot.val()[preference]);
                         answer = snapshot.val()[preference].answer;
 
                     switch (answer) {
-                        case 'papa-johns':
+                        case 'conan':
                             pj++;
                             break;
-                        case 'pizza-hut':
+                        case 'samantha':
                             ph++;
                             break;
                         default:
@@ -77,9 +83,9 @@
                     }
                 }
             }
-            console.log(pj);
-            console.log(ph);
-            console.log(un);
+            // console.log(pj);
+            // console.log(ph);
+            // console.log(un);
             jQuery('.stat-1').height(pj + '%');
             jQuery('.stat-2').height(ph + '%');
             jQuery('.stat-3').height(un + '%');
