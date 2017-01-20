@@ -1,44 +1,16 @@
 <html>
     <head>
         <title>Cooper</title>
-        <link rel="stylesheet" href="css/data.css">
+        <link rel="stylesheet" href="css/viz.css">
         <script src="js/vendor/jquery-1.12.4.min.js"></script>
         <script src="js/vendor/d3.v4.min.js"></script>
         <script src="js/vendor/firebase-3.6.1.js"></script>
+        <script src="js/viz.break.bundle.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     </head>
     <body>
-        <div class="date">
-            <div class="day" id="day"></div>
-            <div class="clock" id="clock"></div>
-        </div>
-        <div id="bar-chart">
-          <div class="graph">
-            <ul class="x-axis">
-              <li><span>Yes</span></li>
-              <li><span>No</span></li>
-              <li><span>Undecided</span></li>
-            </ul>
-            <ul class="y-axis">
-              <li><span>100</span></li>
-              <li><span>75</span></li>
-              <li><span>50</span></li>
-              <li><span>25</span></li>
-              <li><span>0</span></li>
-            </ul>
-            <div class="bars">
-              <div class="bar-group">
-                <div class="bar bar-1 stat-1"></div>
-              </div>
-              <div class="bar-group">
-                <div class="bar bar-5 stat-2"></div>
-              </div>
-              <div class="bar-group">
-                <div class="bar bar-9 stat-3"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="viz"></div>
+
         <script>
         /*global firebase, jQuery*/
         'use strict';
@@ -54,37 +26,7 @@
 
         firebase.initializeApp(config);
         preferences = firebase.database().ref('break/');
-        preferences.on('value', function(snapshot) {
-            var pj = 0,
-                ph = 0,
-                un = 0,
-                answer;
-            for (preference in snapshot.val()) {
-                if (snapshot.val().hasOwnProperty(preference)) {
-                    console.log(snapshot.val()[preference]);
-                        answer = snapshot.val()[preference].answer;
-
-                    switch (answer) {
-                        case 'yes':
-                            pj++;
-                            break;
-                        case 'no':
-                            ph++;
-                            break;
-                        default:
-                            un++;
-                            break;
-                    }
-                }
-            }
-            console.log(pj);
-            console.log(ph);
-            console.log(un);
-            jQuery('.stat-1').height(pj + '%');
-            jQuery('.stat-2').height(ph + '%');
-            jQuery('.stat-3').height(un + '%');
-        });
+        preferences.on('value', drawBreakViz);
         </script>
-        <script src="js/vendor/time.js"></script>
     </body>
 </html>

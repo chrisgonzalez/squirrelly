@@ -4,15 +4,23 @@ const prod = process.env.NODE_ENV === 'production';
 
 module.exports = {
     entry: {
-        viz: [
+        bar: [
             'es6-promise',
-            path.join(__dirname, 'public/js/viz.js')
+            path.join(__dirname, 'public/js/viz.bar.js')
+        ],
+        break: [
+            'es6-promise',
+            path.join(__dirname, 'public/js/viz.break.js')
+        ],
+        clusters: [
+            'es6-promise',
+            path.join(__dirname, 'public/js/viz.clusters.js')
         ]
     },
 
     output: {
         path: path.join(__dirname, 'public/js/'),
-        filename: '[name].bundle.js',
+        filename: 'viz.[name].bundle.js',
         /* path root for imports */
         publicPath: __dirname
     },

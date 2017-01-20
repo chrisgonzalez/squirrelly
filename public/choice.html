@@ -5,7 +5,7 @@
         <script src="js/vendor/jquery-1.12.4.min.js"></script>
         <script src="js/vendor/d3.v4.min.js"></script>
         <script src="js/vendor/firebase-3.6.1.js"></script>
-        <script src="js/viz.bundle.js"></script>
+        <script src="js/viz.clusters.bundle.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     </head>
     <body>
@@ -14,7 +14,10 @@
             <div class="clock" id="clock"></div>
         </div>
 
-        <div class="viz"></div>
+        <svg class="viz">
+            <defs>
+            </defs>
+        </svg>
 
         <script>
         /*global firebase, jQuery*/
@@ -31,10 +34,8 @@
 
         firebase.initializeApp(config);
         preferences = firebase.database().ref('presenters/');
-        preferences.on('value', function(snapshot) {
-            drawBarGraph(voteCounts(snapshot.val()));
-            voteCounts(snapshot.val())
-        });
+        preferences.on('value', drawClusters);
+
         </script>
         <script src="js/vendor/time.js"></script>
     </body>

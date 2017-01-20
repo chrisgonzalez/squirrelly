@@ -4,7 +4,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "develop": "parallelshell 'webpack --watch' 'npm start'"
+    "develop": "parallelshell 'webpack --watch' 'npm start'",
+    "build": "webpack -p"
   },
   "dependencies": {
     "node-static": "0.7.6"
